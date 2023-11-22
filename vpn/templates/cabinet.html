@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block content %}
+<h2>Зміна username</h2>
+<form method="POST">
+    {%csrf_token%}
+    {{form_username.username}}<br>
+    <br>
+    <button type="submit" > Перейти </button>
+</form>
+<br>
+<h2>Зміна email</h2>
+<form method="POST">
+    {%csrf_token%}
+    {{form_email.email}}<br>
+    <br>
+    <button type="submit"> Перейти </button>
+</form>
+<br>
+  <h2>Сайти</h2>
+{%for site in sites%}
+<br>
+<a href = "{{path}}{{site.url}}">{{site.name}}</a>
+<br>
+<a href="{{path}}{{site.url}}">{{site.url}}</a>
+<br>
+{%endfor%}
+<h2>Статистика</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Сайт</th>
+        <th>Звідки</th>
+        <th>Куди</th>
+        <th>Об'єм відправлених даних</th>
+        <th>Об'єм отриманих даних</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for stat in stats %}
+        <tr>
+          <td>{{ stat.site.name }}</td>
+          <td>{{ stat.from_path }}</td>
+          <td>{{ stat.to_path }}</td>
+          <td>{{ stat.data_sent }} байт</td>
+          <td>{{ stat.data_received }} байт</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

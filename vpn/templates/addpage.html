@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{%load static%}
+{%block title%} {%endblock%}
+{%block content%}
+<h1>{{title}}</h1>
+<form method="POST" class="form-control">
+    {%csrf_token%}
+    {{form.url}}<br>
+    <br>
+    {{form.name}}<br>
+    <button type="submit" class="btn btn-secondary"> Перейти </button>
+    <h1>{{eror}}</h1>
+</form>
+{%endblock%}
+
